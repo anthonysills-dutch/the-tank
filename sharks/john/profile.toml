@@ -1,0 +1,103 @@
+# Investor model: Daymond John (investor mode)
+#
+# Same rules as sharks/cuban/profile.toml: every belief carries verbatim quotes tied to a listed
+# source, and scripts/check_quotes.py confirms each quote word for word in the fetched corpus.
+# derived-from-deals beliefs are read off the deal record by tank/stats.py and carry no quote.
+
+name = "Daymond John"
+slug = "john"
+status = "sourced"
+version = "0.1.0"
+reviewed = "2026-10-22"
+tenure_note = "On the panel from Season 1, not in every episode. The dataset decides which pitches he saw."
+lens = "The founder's influence and fit with his portfolio"
+
+[[beliefs]]
+id = "like-the-person"
+weight = "core"
+confidence = "quoted-by-outlet"
+claim = "The bottom line is whether he likes the person and could work with them for years."
+applies_as = "Judges the founder as a long-term partner first."
+quotes = [
+  { text = "The bottom line is if I like the person.", source = "revolt-2018" },
+  { text = "and I have to like the person.", source = "cheddar-resonate" },
+]
+
+[[beliefs]]
+id = "influence-first"
+weight = "core"
+confidence = "interview"
+claim = "Looks first for influence: whether the founder can pitch clearly in 90 seconds and has built a following and reputation that shows what they stand for."
+applies_as = "Checks the founder's audience, causes and network, not only the product."
+quotes = [
+  { text = "I get asked all the time what do I look for in a great pitch. Influence is the first thing.", source = "bigthink-pitch" },
+  { text = "I'm going to go immediately to one of your social media accounts", source = "bigthink-pitch" },
+]
+
+[[beliefs]]
+id = "failed-learned-repeated"
+weight = "strong"
+confidence = "interview"
+claim = "Wants confidence and a founder who has failed, learned and kept going with the same passion."
+applies_as = "Past failures handled well count for the founder. Asks whether they solve problems or create them."
+quotes = [
+  { text = "I look for the fact that the person has went down the road, they have failed a couple of times but they act, they learn and then they repeat it.", source = "bigthink-pitch" },
+  { text = "Will they be a problem solver or a problem creator.", source = "bigthink-pitch" },
+]
+
+[[beliefs]]
+id = "train-leaves-without-me"
+weight = "strong"
+confidence = "quoted-by-outlet"
+claim = "Backs founders with momentum who know their customer, so his money isn't paying for their learning."
+applies_as = "Prefers a business already moving; wary of using his money as tuition."
+quotes = [
+  { text = "I feel like the train is gonna leave whether I'm on it or not.", source = "cheddar-resonate" },
+  { text = "They know their customer very well, so they're not using my money as tuition", source = "cheddar-resonate" },
+]
+
+[[beliefs]]
+id = "fit-the-portfolio"
+weight = "strong"
+confidence = "interview"
+claim = "Has many apparel brands already and avoids new ones unless something is unusual; founders who show how they add to his portfolio do better."
+applies_as = "Discounts plain apparel pitches. Rewards founders who researched what he needs."
+quotes = [
+  { text = "Normally I don't want to do any other apparel business because I already have ten clothing brands and eight of them are dead.", source = "bigthink-pitch" },
+]
+
+[[misfires]]
+claim = "He says deals are rarely made in the first pitch and close after months of diligence. A single pitch card can't show the influence and relationship he weighs most."
+quotes = [
+  { text = "You almost never get anywhere in the initial pitch.", source = "bigthink-pitch" },
+]
+
+[[misfires]]
+claim = "Brand building and licensing are what he is known for, but none of the verified sources here says how they shape his investing. Don't assume a branding lens beyond the apparel point."
+quotes = [
+]
+
+[[dealbreakers]]
+claim = "He doesn't want to work with the founder."
+from = ["like-the-person"]
+
+[[sources]]
+id = "bigthink-pitch"
+title = "What Shark Tank investor Daymond John looks for in a business pitch (Big Think, video transcript)"
+url = "https://bigthink.com/the-present/shark-tank-business-pitch/"
+kind = "interview"
+date = "unknown"
+
+[[sources]]
+id = "cheddar-resonate"
+title = "Daymond John's investments need to resonate with him (Cheddar)"
+url = "https://cheddar.com/media/daymond-johns-key-to-success-the-investor-has-to-resonate-with-it"
+kind = "quoted-by-outlet"
+date = "unknown"
+
+[[sources]]
+id = "revolt-2018"
+title = "Daymond John talks new book, FUBU and investing on The Breakfast Club (Revolt)"
+url = "https://revolt.tv/article/2018-02-13/37537/daymond-john-talks-new-book-fubu-and-investing-on-the-breakfast-club"
+kind = "quoted-by-outlet"
+date = "2018-02-13"

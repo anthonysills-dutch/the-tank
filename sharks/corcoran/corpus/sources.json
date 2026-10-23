@@ -1,0 +1,40 @@
+{
+  "nasdaq-friends": {
+    "url": "https://www.nasdaq.com/articles/why-barbara-corcoran-says-investing-friends-bad-idea",
+    "status": "fail: HTTP Error 403: Forbidden"
+  },
+  "biggerpockets-13": {
+    "url": "https://www.biggerpockets.com/blog/biggerpockets-business-podcast-13",
+    "status": "ok",
+    "words": 9291,
+    "fetched": "2026-10-22"
+  },
+  "entrepreneur-224620": {
+    "url": "https://www.entrepreneur.com/blog/224620",
+    "status": "ok",
+    "words": 948,
+    "fetched": "2026-10-22"
+  },
+  "aol-mad-money": {
+    "url": "https://www.aol.com/news/barbara-corcoran-shares-major-difference-120115913.html",
+    "status": "fail: HTTP Error 404: Not Found"
+  },
+  "gobankingrates-friends": {
+    "url": "https://www.gobankingrates.com/investing/strategy/barbara-corcoran-investing-with-friends-bad-idea/",
+    "status": "ok",
+    "words": 1290,
+    "fetched": "2026-10-22"
+  },
+  "cheatsheet-lost-money": {
+    "url": "https://www.cheatsheet.com/entertainment/shark-tank-barbara-corcoran-lost-ton-money-2-years-show.html",
+    "status": "ok",
+    "words": 658,
+    "fetched": "2026-10-22"
+  },
+  "resident-2016": {
+    "url": "https://resident.com/interviews/2016/05/06/becoming-barbara-corcoran",
+    "status": "ok",
+    "words": 2763,
+    "fetched": "2026-10-22"
+  }
+}

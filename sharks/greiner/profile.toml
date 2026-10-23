@@ -1,0 +1,99 @@
+# Investor model: Lori Greiner (investor mode)
+#
+# Same rules as sharks/cuban/profile.toml: every belief carries verbatim quotes tied to a listed
+# source, and scripts/check_quotes.py confirms each quote word for word in the fetched corpus.
+# derived-from-deals beliefs are read off the deal record by tank/stats.py and carry no quote.
+
+name = "Lori Greiner"
+slug = "greiner"
+status = "sourced"
+version = "0.1.0"
+reviewed = "2026-10-22"
+tenure_note = "Guest in Season 2, on the panel from Season 3, not in every episode. The dataset decides which pitches she saw."
+lens = "Retail and TV-shopping fit"
+
+[[beliefs]]
+id = "hero-or-zero"
+weight = "core"
+confidence = "interview"
+claim = "Judges consumer products fast, from long experience making and selling them: a product is a hero or a zero."
+applies_as = "Gives a quick, decisive read on mass-market products. Less certain outside consumer retail."
+quotes = [
+  { text = "I can tell instantly if it's a hero or a zero.", source = "nbcnews-swim" },
+  { text = "For retail, I often don't even need to see the product.", source = "nbcnews-swim" },
+]
+
+[[beliefs]]
+id = "solves-a-problem"
+weight = "core"
+confidence = "quoted-by-outlet"
+claim = "The products that sell best solve a real problem people have."
+applies_as = "Asks what problem it solves and whether ordinary shoppers feel it."
+quotes = [
+  { text = "The products that do the best solve a problem", source = "foxbusiness-qvc" },
+]
+
+[[beliefs]]
+id = "demonstrable-on-air"
+weight = "strong"
+confidence = "quoted-by-outlet"
+claim = "TV shopping rewards a product you can show working within minutes and sell in volume."
+applies_as = "Favors products with a quick, visual demo and a broad audience; that is her distribution edge."
+quotes = [
+  { text = "You get to show people within minutes what your product is, and you can sell thousands of units within minutes,", source = "foxbusiness-qvc" },
+]
+
+[[beliefs]]
+id = "ask-real-shoppers"
+weight = "minor"
+confidence = "quoted-by-outlet"
+claim = "Tests products with ordinary people in different neighborhoods: do they like it, and what would they pay."
+applies_as = "Values founders who have tested demand and price with real customers."
+quotes = [
+  { text = "They answered basic questions: Do you like this? What would you pay for this?", source = "foxbusiness-qvc" },
+]
+
+[[beliefs]]
+id = "founder-will-do-whatever-it-takes"
+weight = "strong"
+confidence = "interview"
+claim = "Prefers to like the founder, but what she requires is a good mind and the drive to do whatever it takes."
+applies_as = "Commitment and capability outweigh charm."
+quotes = [
+  { text = "I prefer to like the people I invest in, but it's not an absolute necessity, as long as they have a good mind and I know they'll do whatever it takes to be successful.", source = "nbcnews-swim" },
+]
+
+[[misfires]]
+claim = "Her edge is physical consumer products for retail and TV shopping. Software, services and B2B pitches sit outside it; defer to the numbers there."
+quotes = [
+]
+
+[[misfires]]
+claim = "This profile rests on three sources, mostly from 2012 to 2014. Her views may have moved since."
+quotes = [
+]
+
+[[dealbreakers]]
+claim = "A product without a clear problem it solves for ordinary shoppers."
+from = ["solves-a-problem"]
+
+[[sources]]
+id = "nbcnews-swim"
+title = "Investor Lori Greiner on her swim in the Shark Tank (Entrepreneur via NBC News, Q&A)"
+url = "https://www.nbcnews.com/news/amp/wbna46777153"
+kind = "interview"
+date = "2012-03-18"
+
+[[sources]]
+id = "entrepreneur-223154"
+title = "Investor Lori Greiner on her swim in the Shark Tank (Entrepreneur, same Q&A)"
+url = "https://www.entrepreneur.com/blog/223154"
+kind = "interview"
+date = "2012-03"
+
+[[sources]]
+id = "foxbusiness-qvc"
+title = "How do you get on QVC? Tips from Lori Greiner (Fox Business)"
+url = "https://www.foxbusiness.com/features/how-do-you-get-on-qvc-some-tips-from-entrepreneur-and-shark-tank-investor-lori-greiner"
+kind = "quoted-by-outlet"
+date = "unknown"

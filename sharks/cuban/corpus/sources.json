@@ -1,0 +1,90 @@
+{
+  "inc-three-rules": {
+    "url": "https://www.inc.com/kimberly-weisul/mark-cuban-three-rules-business-success-one-secret.html",
+    "status": "fail: HTTP Error 403: Forbidden"
+  },
+  "techco-sales-cures": {
+    "url": "https://tech.co/news/mark-cuban-startup-sales-cures-2017-10",
+    "status": "ok",
+    "words": 819,
+    "fetched": "2026-10-22"
+  },
+  "cnbc-effort-2023": {
+    "url": "https://www.cnbc.com/2023/06/21/mark-cuban-why-effort-is-a-huge-competitive-advantage-for-success.html",
+    "status": "ok",
+    "words": 646,
+    "fetched": "2026-10-22"
+  },
+  "smartcompany-advice": {
+    "url": "https://www.smartcompany.com.au/business-advice/three-pieces-of-no-nonsense-advice-for-entrepreneurs-from-billionaire-mark-cuban/",
+    "status": "ok",
+    "words": 808,
+    "fetched": "2026-10-22"
+  },
+  "blackenterprise-rules": {
+    "url": "https://www.blackenterprise.com/shark-tank-investor-mark-cuban-rules-for-startup-success/",
+    "status": "ok",
+    "words": 431,
+    "fetched": "2026-10-22"
+  },
+  "usatoday-exit-2025": {
+    "url": "https://www.aol.com/why-mark-cuban-leaving-shark-200003429.html",
+    "status": "ok",
+    "words": 910,
+    "fetched": "2026-10-22"
+  },
+  "cnbc-strategy-2022": {
+    "url": "https://www.cnbc.com/2022/07/26/mark-cuban-shark-tank-investing-strategy-isnt-always-making-money.html",
+    "status": "ok",
+    "words": 709,
+    "fetched": "2026-10-22"
+  },
+  "cnbc-flops-2022": {
+    "url": "https://www.cnbc.com/2022/09/26/mark-cuban-says-many-of-his-shark-tank-investment-deals-are-flops.html",
+    "status": "ok",
+    "words": 701,
+    "fetched": "2026-10-22"
+  },
+  "cnbc-imout-2020": {
+    "url": "https://www.cnbc.com/2020/01/06/shark-tank-cuban-and-corcoran-talk-about-selling-their-businesses.html",
+    "status": "ok",
+    "words": 780,
+    "fetched": "2026-10-22"
+  },
+  "blog-rules-2008": {
+    "url": "https://blogmaverick.com/2008/03/09/my-rules-for-startups/",
+    "status": "ok",
+    "words": 715,
+    "fetched": "2026-10-22"
+  },
+  "blog-sweat-2004": {
+    "url": "https://blogmaverick.com/2004/06/08/rules-of-success-1-sweat-equity-is-the-best-equity/",
+    "status": "ok",
+    "words": 1498,
+    "fetched": "2026-10-22"
+  },
+  "blog-sweat-2008": {
+    "url": "https://blogmaverick.com/2008/01/02/the-best-equity-is-sweat-equity/",
+    "status": "ok",
+    "words": 1489,
+    "fetched": "2026-10-22"
+  },
+  "blog-motivation-2009": {
+    "url": "https://blogmaverick.com/2009/05/13/success-motivation/",
+    "status": "ok",
+    "words": 11901,
+    "fetched": "2026-10-22"
+  },
+  "cnbc-youthforia-2023": {
+    "url": "https://www.cnbc.com/make-it/2023/03/06/mark-cuban-shark-tank-deal-with-youthforia-is-for-daughters-wife.html",
+    "status": "ok",
+    "words": 702,
+    "fetched": "2026-10-22"
+  },
+  "cnbc-bs-2023": {
+    "url": "https://www.cnbc.com/2023/01/18/why-mark-cuban-rejected-a-shark-tank-pitch-that-brings-in-millions.html",
+    "status": "ok",
+    "words": 795,
+    "fetched": "2026-10-22"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "site-inc-people": {
+    "url": "https://daymondjohn.com/blogs/news/84038852-daymond-tells-inc-magazine-why-he-invests-in-people-not-companies",
+    "status": "ok",
+    "words": 711,
+    "fetched": "2026-10-22"
+  },
+  "site-shark-stories": {
+    "url": "https://daymondjohn.com/blogs/news/84017284-daymond-s-shark-tank-stories",
+    "status": "ok",
+    "words": 473,
+    "fetched": "2026-10-22"
+  },
+  "bigthink-pitch": {
+    "url": "https://bigthink.com/the-present/shark-tank-business-pitch/",
+    "status": "ok",
+    "words": 3421,
+    "fetched": "2026-10-22"
+  },
+  "mjbiz-qa-2021": {
+    "url": "https://mjbizdaily.com/shark-tanks-daymond-john-discusses-investing-branding-best-business-advice/",
+    "status": "fail: HTTP Error 403: Forbidden"
+  },
+  "cheddar-resonate": {
+    "url": "https://cheddar.com/media/daymond-johns-key-to-success-the-investor-has-to-resonate-with-it",
+    "status": "ok",
+    "words": 555,
+    "fetched": "2026-10-22"
+  },
+  "revolt-2018": {
+    "url": "https://revolt.tv/article/2018-02-13/37537/daymond-john-talks-new-book-fubu-and-investing-on-the-breakfast-club",
+    "status": "ok",
+    "words": 528,
+    "fetched": "2026-10-22"
+  },
+  "bi-favorites": {
+    "url": "https://www.businessinsider.in/these-are-shark-tank-star-daymond-johns-favorite-investments/articleshow/49864952.cms",
+    "status": "fail: <urlopen error [Errno 11001] getaddrinfo failed>"
+  },
+  "mjbiz-qa-alt": {
+    "url": "https://mjbizdaily.com/?p=279183",
+    "status": "fail: HTTP Error 403: Forbidden"
+  }
+}

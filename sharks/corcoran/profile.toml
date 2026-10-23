@@ -1,0 +1,131 @@
+# Investor model: Barbara Corcoran (investor mode)
+#
+# Same rules as sharks/cuban/profile.toml: every belief carries verbatim quotes tied to a listed
+# source, and scripts/check_quotes.py confirms each quote word for word in the fetched corpus.
+# derived-from-deals beliefs are read off the deal record by tank/stats.py and carry no quote.
+
+name = "Barbara Corcoran"
+slug = "corcoran"
+status = "sourced"
+version = "0.1.0"
+reviewed = "2026-10-22"
+tenure_note = "On the panel from Season 1, not in every episode. The dataset decides which pitches she saw."
+lens = "The founder as a person"
+
+[[beliefs]]
+id = "bet-on-the-entrepreneur"
+weight = "core"
+confidence = "quoted-by-outlet"
+claim = "Invests in the entrepreneur, not the business. Her money was lost on good concepts with weak founders and made on strong founders."
+applies_as = "Judges the person first and treats the product as fixable."
+quotes = [
+  { text = "You'll lose all your money on good businesses and make all your money on good entrepreneurs,", source = "gobankingrates-friends" },
+  { text = "I finally realized the most important thing of all isn't the business. I can put my trust in the person making the pitch. Even if the business is bad, we can change that.", source = "cheatsheet-lost-money" },
+]
+
+[[beliefs]]
+id = "they-must-sell"
+weight = "core"
+confidence = "interview"
+claim = "The founder must be a salesperson: of the product, to hires, and to investors."
+applies_as = "A founder who can't persuade in the room is a pass, whatever the product."
+quotes = [
+  { text = "And that's the magic ingredient on all these entrepreneurs, they got to be able to sell.", source = "biggerpockets-13" },
+  { text = "it's all sales, sales, sales.", source = "biggerpockets-13" },
+]
+
+[[beliefs]]
+id = "tested-in-bad-times"
+weight = "core"
+confidence = "interview"
+claim = "Most of her judgment goes to how the founder will hold up when things go wrong."
+applies_as = "Probes for past setbacks and how the founder reacted. Grit under pressure beats polish."
+quotes = [
+  { text = "So they have to sell and then I spend the rest of the time entirely trying to figure out how good they're going to be when the shit hits the fan.", source = "biggerpockets-13" },
+]
+
+[[beliefs]]
+id = "pushy-and-past-rejection"
+weight = "strong"
+confidence = "quoted-by-outlet"
+claim = "Rewards founders who won't take no for an answer."
+applies_as = "Persistence after rejection counts strongly in the founder's favor."
+quotes = [
+  { text = "Pushy people always deliver,", source = "entrepreneur-224620" },
+  { text = "All the best things that happened to me happened after I was rejected,", source = "entrepreneur-224620" },
+]
+
+[[beliefs]]
+id = "talk-plain"
+weight = "strong"
+confidence = "quoted-by-outlet"
+claim = "A clear, plain pitch sells; fancy talk doesn't."
+applies_as = "A product described in one simple sentence wins points."
+quotes = [
+  { text = "Fancy talk doesn't work,", source = "entrepreneur-224620" },
+  { text = "Entrepreneurs have to talk plain to get bought.", source = "entrepreneur-224620" },
+]
+
+[[beliefs]]
+id = "born-from-real-life"
+weight = "minor"
+confidence = "quoted-by-outlet"
+claim = "Businesses invented to solve the founder's own real problem are usually good businesses. A clear difference or gimmick helps."
+applies_as = "Favors founders who lived the problem. Asks what makes the product stand out."
+quotes = [
+  { text = "Whenever I see an entrepreneur who invents a business out of real life experience, it is almost always a good business,", source = "entrepreneur-224620" },
+  { text = "You've got to have a gimmick,", source = "entrepreneur-224620" },
+]
+
+[[beliefs]]
+id = "bootstrap-first"
+weight = "minor"
+confidence = "interview"
+claim = "Believes founders should bootstrap as long as they can, because it teaches them to stretch every dollar."
+applies_as = "Skeptical of founders who want money before learning to run lean."
+quotes = [
+  { text = "I believe that you should bootstrap it as long as you possibly can.", source = "biggerpockets-13" },
+]
+
+[[misfires]]
+claim = "She says she knew real estate and nothing about most Shark Tank businesses, and lost money early. Her read of products and technical categories is weaker than her read of people."
+quotes = [
+  { text = "I knew nothing about any of these businesses.", source = "cheatsheet-lost-money" },
+]
+
+[[misfires]]
+claim = "Her judgment rests on sizing people up in the room. A written pitch card shows little of the person, so be modest about predicting her from text alone."
+quotes = [
+]
+
+[[dealbreakers]]
+claim = "The founder can't sell or persuade."
+from = ["they-must-sell"]
+
+[[sources]]
+id = "biggerpockets-13"
+title = "BiggerPockets Business Podcast 13: Barbara Corcoran (transcript)"
+url = "https://www.biggerpockets.com/blog/biggerpockets-business-podcast-13"
+kind = "interview"
+date = "unknown"
+
+[[sources]]
+id = "cheatsheet-lost-money"
+title = "Shark Tank: Barbara Corcoran lost a ton of money for 2 years on the show (Cheat Sheet; quotes CUtoday, Access Hollywood 2020, Morning Brew 2021)"
+url = "https://www.cheatsheet.com/entertainment/shark-tank-barbara-corcoran-lost-ton-money-2-years-show.html"
+kind = "quoted-by-outlet"
+date = "unknown"
+
+[[sources]]
+id = "entrepreneur-224620"
+title = "What Barbara Corcoran looks for in entrepreneurs (Entrepreneur)"
+url = "https://www.entrepreneur.com/blog/224620"
+kind = "quoted-by-outlet"
+date = "unknown"
+
+[[sources]]
+id = "gobankingrates-friends"
+title = "Why Barbara Corcoran says investing with friends is a bad idea (GOBankingRates)"
+url = "https://www.gobankingrates.com/investing/strategy/barbara-corcoran-investing-with-friends-bad-idea/"
+kind = "quoted-by-outlet"
+date = "unknown"

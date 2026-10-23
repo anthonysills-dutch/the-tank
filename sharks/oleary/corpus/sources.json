@@ -1,0 +1,50 @@
+{
+  "aol-ultimatum": {
+    "url": "https://www.aol.com/finance/kevin-o-leary-brutal-ultimatum-160000997.html",
+    "status": "fail: HTTP Error 404: Not Found"
+  },
+  "cnbc-negotiating-2020": {
+    "url": "https://www.cnbc.com/2020/10/29/kevin-oleary-how-to-make-the-best-deals-when-negotiating.html",
+    "status": "ok",
+    "words": 602,
+    "fetched": "2026-10-22"
+  },
+  "nbc-founder-cry": {
+    "url": "https://www.nbclosangeles.com/news/business/money-report/kevin-oleary-made-a-shark-tank-founder-cry-and-then-invested-100000-in-her-start-up/2799511/",
+    "status": "ok",
+    "words": 733,
+    "fetched": "2026-10-22"
+  },
+  "ibtimes-ring": {
+    "url": "https://www.ibtimes.co.uk/kevin-oleary-ring-missed-opportunity-1804948",
+    "status": "ok",
+    "words": 687,
+    "fetched": "2026-10-22"
+  },
+  "speakers-3things-2015": {
+    "url": "https://www.speakers.ca/2015/11/kevin-oleary-3-things-it-takes-to-get-a-deal-on-shark-tank/",
+    "status": "thin",
+    "words": 19,
+    "fetched": "2026-10-22"
+  },
+  "bucknell-talk": {
+    "url": "https://www.bucknell.edu/news/entrepreneur-and-investor-kevin-oleary-shares-how-succeed-business",
+    "status": "ok",
+    "words": 1138,
+    "fetched": "2026-10-22"
+  },
+  "aol-hockey-stick-2026": {
+    "url": "https://www.aol.com/articles/kevin-oleary-every-founder-hockey-221627717.html",
+    "status": "fail: HTTP Error 404: Not Found"
+  },
+  "ivey-2014": {
+    "url": "https://ivey.uwo.ca/news/news-ivey/2014/11/kevin-oleary-sharing-entrepreneurial-lessons-from-shark-tank",
+    "status": "fail: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1010)>"
+  },
+  "sherbrooke-numbers-2022": {
+    "url": "https://business.sherbrookerecord.com/sherbrookerecord/news/read/42175987/kevin_o'leary_on_'shark_tank'_pet_peeves",
+    "status": "thin",
+    "words": 88,
+    "fetched": "2026-10-22"
+  }
+}

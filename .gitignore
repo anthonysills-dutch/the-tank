@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+data/raw/
+eval/results/
+.venv/
+sharks/*/corpus/*.txt
+eval/work/
+dist/

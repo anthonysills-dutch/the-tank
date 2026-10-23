@@ -1,0 +1,11 @@
+{
+  "name": "the-tank",
+  "owner": { "name": "Anthony Sills" },
+  "plugins": [
+    {
+      "name": "the-tank",
+      "source": "./",
+      "description": "Independent investor models built from each original Shark's public record."
+    }
+  ]
+}

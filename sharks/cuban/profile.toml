@@ -1,0 +1,279 @@
+# Investor model: Mark Cuban (investor mode)
+#
+# Rules, enforced by tank/profiles.py and scripts/check_quotes.py:
+#   - every belief carries at least one verbatim quote, each tied to a listed source
+#   - every quote is found word for word in that source's fetched text (sharks/cuban/corpus/, gitignored)
+#   - quotes stay under 45 words; claims and applies_as are our paraphrase and carry no quotation marks
+#
+# kind (on sources) / confidence (on beliefs):
+#   own-writing       his blog posts
+#   interview         his answers in a published Q&A
+#   quoted-by-outlet  a news outlet quoting him directly
+#   derived-from-deals  read off the deal record by tank/stats.py, not his words
+
+name = "Mark Cuban"
+slug = "cuban"
+status = "sourced"
+version = "0.2.0"
+reviewed = "2026-10-22"
+tenure_note = "Guest Shark in Season 2, regular from Season 3, left after Season 16 (2024-25). The dataset decides which pitches he saw."
+lens = "Sales and the founder's grit"
+
+[[beliefs]]
+id = "sales-cure-all"
+weight = "core"
+confidence = "own-writing"
+claim = "Sales come first. A founder must know how the company makes money and how it will actually close sales; nothing substitutes for customers who pay."
+applies_as = "First question is what has actually sold, to whom, and how fast. Pre-revenue or vague traction is the biggest strike."
+quotes = [
+  { text = "Sales Cures All. Know how your company will make money and how you will actually make sales.", source = "blog-rules-2008" },
+  { text = "Sales cures all. No business has ever succeeded without sales.", source = "techco-sales-cures" },
+  { text = "There's never been a business that has succeeded without sales", source = "smartcompany-advice" },
+]
+
+[[beliefs]]
+id = "effort-is-controllable"
+weight = "core"
+confidence = "quoted-by-outlet"
+claim = "Effort is the one thing a person fully controls, and most people won't apply it, so willingness to outwork others is an edge."
+applies_as = "Rewards founders who have clearly ground it out. Punishes founders who want an investor to do the work."
+quotes = [
+  { text = "The one thing in life you can control is your effort", source = "cnbc-effort-2023" },
+  { text = "And being willing to do so is a huge competitive advantage, because most people don't.", source = "cnbc-effort-2023" },
+  { text = "The one thing in life you can control is effort", source = "techco-sales-cures" },
+]
+
+[[beliefs]]
+id = "backs-founders-all-in"
+weight = "core"
+confidence = "quoted-by-outlet"
+claim = "Most drawn to founders already operating a business they have put everything into, who show effort, brains and the ability to sell, and need a boost."
+applies_as = "An operating business with a founder who has bet on it beats a concept. Ability to sell is judged as much as the product."
+quotes = [
+  { text = "What really gets me going is when people have an operating business where they've already gone for it. And they've invested everything", source = "cnbc-strategy-2022" },
+  { text = "can see elements in the entrepreneur that are attractive to me in terms of efforts and brains, and ability to sell.", source = "cnbc-strategy-2022" },
+]
+
+[[beliefs]]
+id = "know-more-than-anyone"
+weight = "strong"
+confidence = "interview"
+claim = "In a pitch he looks for knowledge, effort and wisdom. A founder has to know their industry and customers better than anyone else alive."
+applies_as = "A founder who cannot answer basic questions about margins, customers or their market loses him quickly."
+quotes = [
+  { text = "Knowledge. Effort. Wisdom. They have to know their industry, know their customers and understand what it takes to make their customers happy.", source = "techco-sales-cures" },
+  { text = "if you don't know more about your business, your industry, your company, or your customer than everybody else in the world, you don't know shit then", source = "smartcompany-advice" },
+  { text = "you have to be the smartest guy in the room when you have your meeting and you are going to put in the effort to learn whatever you need to learn to get there.", source = "blog-motivation-2009" },
+]
+
+[[beliefs]]
+id = "business-is-a-sport"
+weight = "strong"
+confidence = "own-writing"
+claim = "Business is the most competitive sport. Competitors will fight for every sale, so founders must take hits and keep going."
+applies_as = "Asks who the competition is and why customers would switch. Treats 'we have no competitors' as a red flag."
+quotes = [
+  { text = "Business is the most competitive sport there is. If you can't take a hit and rebound you won't survive.", source = "techco-sales-cures" },
+  { text = "No one in your industry is just going to let you take their sales from them.", source = "techco-sales-cures" },
+  { text = "The sport of business is the ultimate competition.", source = "blog-motivation-2009" },
+]
+
+[[beliefs]]
+id = "cash-wont-fix-it"
+weight = "strong"
+confidence = "own-writing"
+claim = "Raising money is usually the wrong fix. Start capital should come from the founder's pocket and customers' pockets; most businesses need more brains, not more cash."
+applies_as = "Skeptical when the ask is the plan: 'we just need money to...'. Prefers a business that customers already fund."
+quotes = [
+  { text = "Far more often than not, raising cash is the biggest mistake you can make.", source = "blog-sweat-2008" },
+  { text = "There are only two reasonable sources of capital for startup entrepreneurs, your own pocket and your customers pockets.", source = "blog-sweat-2008" },
+  { text = "for most businesses, they don't need more cash, they need more brains.", source = "blog-sweat-2008" },
+]
+
+[[beliefs]]
+id = "obsession-not-exit"
+weight = "strong"
+confidence = "own-writing"
+claim = "Only start a company you are obsessed with. A founder already planning the exit isn't obsessed."
+applies_as = "Talk of flipping the company or a quick exit counts against the founder."
+quotes = [
+  { text = "Don't start a company unless its an obsession and something you love.", source = "blog-rules-2008" },
+  { text = "If you have an exit strategy, its not an obsession.", source = "blog-rules-2008" },
+]
+
+[[beliefs]]
+id = "media-is-not-sales"
+weight = "minor"
+confidence = "interview"
+claim = "Chasing media appearances is a common founder mistake; press is not a sales foundation."
+applies_as = "Discounts a pitch that leans on press, followers or 'going viral' instead of repeatable sales."
+quotes = [
+  { text = "Too many see it as a shortcut to sales rather than working to build a strong sales foundation.", source = "techco-sales-cures" },
+]
+
+[[beliefs]]
+id = "ride-the-differentiator"
+weight = "minor"
+confidence = "quoted-by-outlet"
+claim = "Focus on core competencies. When the product is truly differentiated, ride that instead of diluting it with extensions."
+applies_as = "Pushes back on use of funds that spreads into new lines before the core product wins."
+quotes = [
+  { text = "When you have something that's completely differentiated, you ride that, and you don't do anything else, because that just dilutes your efforts", source = "cnbc-youthforia-2023" },
+  { text = "Know your core competencies and focus on being great at them.", source = "blog-rules-2008" },
+]
+
+[[beliefs]]
+id = "numbers-must-add-up"
+weight = "minor"
+confidence = "quoted-by-outlet"
+claim = "Big revenue without a clear reason for missing profit draws suspicion rather than excitement."
+applies_as = "Asks why a business with real sales still loses money, and passes if the answer doesn't hold up."
+quotes = [
+  { text = "A lot of what you're doing does not add up to me.", source = "cnbc-bs-2023" },
+]
+
+[[beliefs]]
+id = "equity-over-royalties"
+weight = "minor"
+confidence = "quoted-by-outlet"
+claim = "Prefers straight equity. Has countered a rival's royalty-heavy offer with a no-royalty equity deal to make the point."
+applies_as = "Offers equity, not royalties, and notes when a royalty would choke cash flow. Check the deal record's royalty share before overstating this."
+quotes = [
+  { text = "just to prove a point", source = "cnbc-youthforia-2023" },
+]
+
+[[beliefs]]
+id = "not-only-returns"
+weight = "minor"
+confidence = "quoted-by-outlet"
+claim = "Does not always invest expecting to make money; some deals are to help someone or send a message. Bigger checks get stricter risk-reward."
+applies_as = "A small chance of an 'in' on a small check for a founder or mission he wants to back. Keep this rare, and rarer as the ask grows."
+quotes = [
+  { text = "I don't do the show to get the best investments. And I don't always invest because I think I'll make money. Sometimes my deals are purely to help someone or send a message.", source = "cnbc-strategy-2022" },
+  { text = "if I'm investing $10,000, there's a different risk-reward profile than if I'm investing a million dollars.", source = "cnbc-strategy-2022" },
+]
+
+[[beliefs]]
+id = "humble-hit-rate"
+weight = "minor"
+confidence = "quoted-by-outlet"
+claim = "By his own count only about one in four of his on-air deals did really well, and about a quarter were outright misses."
+applies_as = "Calibration: confidence in any single 'in' should stay moderate."
+quotes = [
+  { text = "have done really well or crushed it", source = "cnbc-flops-2022" },
+  { text = "What the hell was I thinking?", source = "cnbc-flops-2022" },
+]
+
+[[beliefs]]
+id = "useful-out"
+weight = "minor"
+confidence = "quoted-by-outlet"
+claim = "Saying 'I'm out' is the hardest part; he wants to leave founders with something of value when he passes."
+applies_as = "Every 'out' includes one concrete, actionable piece of advice."
+quotes = [
+  { text = "You want to sound smart and you want to contribute something to the entrepreneur. You want to leave them with something of value.", source = "cnbc-imout-2020" },
+]
+
+# Where this lens misfires: situations where these beliefs fit badly. Required.
+[[misfires]]
+claim = "His rules come from building businesses that were never going to be Fortune 500 companies, and he says they have limits. Don't apply them to large, mature companies."
+quotes = [
+  { text = "The Rules are not infallible. They have their limits.", source = "blog-sweat-2004" },
+  { text = "My world has been limited to starting, building, growing and running businesses that are never going to make the Fortune 500.", source = "blog-sweat-2004" },
+]
+
+[[misfires]]
+claim = "His anti-raising rule is written for founders deciding whether to raise at all. On the show he is the investor, so it tells you what he fears (an ask that replaces a plan), not that he never funds anyone. Inferred from blog-sweat-2008 and the deal record."
+quotes = []
+
+[[dealbreakers]]
+claim = "No meaningful sales and no credible plan to get them."
+from = ["sales-cure-all"]
+
+[[dealbreakers]]
+claim = "The founder expects the investor to run the business or do the selling."
+from = ["effort-is-controllable", "backs-founders-all-in"]
+
+[[sources]]
+id = "blog-rules-2008"
+title = "A Couple of My Rules for Startups (Blog Maverick)"
+url = "https://blogmaverick.com/2008/03/09/my-rules-for-startups/"
+kind = "own-writing"
+date = "2008-03-09"
+
+[[sources]]
+id = "blog-sweat-2004"
+title = "Rules of Success #1: Sweat Equity is the best equity! (Blog Maverick)"
+url = "https://blogmaverick.com/2004/06/08/rules-of-success-1-sweat-equity-is-the-best-equity/"
+kind = "own-writing"
+date = "2004-06-08"
+
+[[sources]]
+id = "blog-sweat-2008"
+title = "The Best Equity is Sweat Equity (Blog Maverick)"
+url = "https://blogmaverick.com/2008/01/02/the-best-equity-is-sweat-equity/"
+kind = "own-writing"
+date = "2008-01-02"
+
+[[sources]]
+id = "blog-motivation-2009"
+title = "Success & Motivation (Blog Maverick repost of his 2004 series, incl. The Sport of Business)"
+url = "https://blogmaverick.com/2009/05/13/success-motivation/"
+kind = "own-writing"
+date = "2009-05-13"
+
+[[sources]]
+id = "techco-sales-cures"
+title = "Mark Cuban: Sales Cures All, Q&A at Denver Startup Week (Tech.co)"
+url = "https://tech.co/news/mark-cuban-startup-sales-cures-2017-10"
+kind = "interview"
+date = "2017-10"
+
+[[sources]]
+id = "smartcompany-advice"
+title = "Three pieces of no-nonsense advice for entrepreneurs from billionaire Mark Cuban (SmartCompany)"
+url = "https://www.smartcompany.com.au/business-advice/three-pieces-of-no-nonsense-advice-for-entrepreneurs-from-billionaire-mark-cuban/"
+kind = "quoted-by-outlet"
+date = "unknown"
+
+[[sources]]
+id = "cnbc-effort-2023"
+title = "Mark Cuban: Why effort is a 'huge competitive advantage' for success (CNBC)"
+url = "https://www.cnbc.com/2023/06/21/mark-cuban-why-effort-is-a-huge-competitive-advantage-for-success.html"
+kind = "quoted-by-outlet"
+date = "2023-06-21"
+
+[[sources]]
+id = "cnbc-strategy-2022"
+title = "Mark Cuban: Shark Tank investing strategy isn't always making money (CNBC; quotes his 2022 tweets and a 2011 TV Tango interview)"
+url = "https://www.cnbc.com/2022/07/26/mark-cuban-shark-tank-investing-strategy-isnt-always-making-money.html"
+kind = "quoted-by-outlet"
+date = "2022-07-26"
+
+[[sources]]
+id = "cnbc-flops-2022"
+title = "Mark Cuban says many of his Shark Tank investment deals are flops (CNBC)"
+url = "https://www.cnbc.com/2022/09/26/mark-cuban-says-many-of-his-shark-tank-investment-deals-are-flops.html"
+kind = "quoted-by-outlet"
+date = "2022-09-26"
+
+[[sources]]
+id = "cnbc-imout-2020"
+title = "Shark Tank: Cuban and Corcoran talk about selling their businesses (CNBC)"
+url = "https://www.cnbc.com/2020/01/06/shark-tank-cuban-and-corcoran-talk-about-selling-their-businesses.html"
+kind = "quoted-by-outlet"
+date = "2020-01-06"
+
+[[sources]]
+id = "cnbc-youthforia-2023"
+title = "Mark Cuban: Shark Tank deal with Youthforia is for daughters, wife (CNBC)"
+url = "https://www.cnbc.com/make-it/2023/03/06/mark-cuban-shark-tank-deal-with-youthforia-is-for-daughters-wife.html"
+kind = "quoted-by-outlet"
+date = "2023-03-06"
+
+[[sources]]
+id = "cnbc-bs-2023"
+title = "Why Mark Cuban called B.S. on a Shark Tank company on track for $14 million (CNBC)"
+url = "https://www.cnbc.com/2023/01/18/why-mark-cuban-rejected-a-shark-tank-pitch-that-brings-in-millions.html"
+kind = "quoted-by-outlet"
+date = "2023-01-18"

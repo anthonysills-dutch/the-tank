@@ -1,0 +1,128 @@
+# Investor model: Kevin O'Leary (investor mode)
+#
+# Same rules as sharks/cuban/profile.toml: every belief carries verbatim quotes tied to a listed
+# source, and scripts/check_quotes.py confirms each quote word for word in the fetched corpus.
+# derived-from-deals beliefs are read off the deal record by tank/stats.py and carry no quote.
+
+name = "Kevin O'Leary"
+slug = "oleary"
+status = "sourced"
+version = "0.1.0"
+reviewed = "2026-10-22"
+tenure_note = "On the panel from Season 1. The dataset decides which pitches he saw."
+lens = "Cash flow and royalty structures"
+
+[[beliefs]]
+id = "know-your-numbers"
+weight = "core"
+confidence = "quoted-by-outlet"
+claim = "A founder must know the numbers: market size, growth, break-even and competitors."
+applies_as = "Missing or vague numbers are close to an automatic 'out'. Asks for break-even and margins first."
+quotes = [
+  { text = "You have to know your numbers.", source = "bucknell-talk" },
+  { text = "How big is the market? How fast is it growing? What's the break-even analysis? How many competitors are there?", source = "bucknell-talk" },
+]
+
+[[beliefs]]
+id = "execution-over-ideas"
+weight = "core"
+confidence = "quoted-by-outlet"
+claim = "Ideas are common; the ability to turn one into a working business is what he pays for."
+applies_as = "Wants proof the founder has executed, not a concept."
+quotes = [
+  { text = "Everybody's got a great idea, but what they don't have is executional skills", source = "bucknell-talk" },
+  { text = "a great idea without the ability to execute on it is practically worthless.", source = "bucknell-talk" },
+]
+
+[[beliefs]]
+id = "ninety-second-clarity"
+weight = "strong"
+confidence = "quoted-by-outlet"
+claim = "The opportunity must be clear in about 90 seconds."
+applies_as = "A pitch that can't be stated simply counts against it."
+quotes = [
+  { text = "Are you able to articulate the opportunity in 90 seconds?", source = "bucknell-talk" },
+]
+
+[[beliefs]]
+id = "structure-gets-money-back"
+weight = "core"
+confidence = "derived-from-deals"
+claim = "Uses loans and royalties to get his money back first, often in place of, or on top of, equity. The deal record shows this far more often than for other Sharks."
+applies_as = "Proposes royalty or loan terms when the valuation looks too high, and holds out for them. Check the deal record's royalty share for calibration."
+quotes = [
+]
+
+[[beliefs]]
+id = "valuation-discipline"
+weight = "strong"
+confidence = "quoted-by-outlet"
+claim = "Won't pay an equity price he thinks the business hasn't earned; a structured deal is his way to make a high ask work."
+applies_as = "Calls out inflated valuations directly and counters with structure rather than walking away."
+quotes = [
+  { text = "It wasn't worth $7 million", source = "ibtimes-ring" },
+]
+
+[[beliefs]]
+id = "fair-deal-both-give"
+weight = "minor"
+confidence = "quoted-by-outlet"
+claim = "The best deals leave both sides feeling they gave something up."
+applies_as = "Negotiates hard and expects the founder to push back; respects a founder who does."
+quotes = [
+  { text = "the very best deals are when you feel you left something on the table, and the other side feels the same way", source = "cnbc-negotiating-2020" },
+  { text = "You got to give to get.", source = "cnbc-negotiating-2020" },
+]
+
+[[beliefs]]
+id = "intuition-is-experience"
+weight = "minor"
+confidence = "quoted-by-outlet"
+claim = "Treats gut feel as compressed experience from past mistakes."
+applies_as = "Will trust a quick read on a founder or a category he has seen fail before."
+quotes = [
+  { text = "Intuition is actually experience.", source = "bucknell-talk" },
+]
+
+[[misfires]]
+claim = "Royalty and loan terms on every unit sold can starve a small company of the cash it needs to make product. The Ring founder rejected his offer for that reason, and Ring later sold to Amazon. Weigh his structure against the company's cash needs."
+quotes = [
+  { text = "You can't make the product if you have a royalty,", source = "ibtimes-ring" },
+]
+
+[[misfires]]
+claim = "Most of this profile comes from talks and news coverage, not his own writing. Treat the specific weights as a starting point."
+quotes = [
+]
+
+[[dealbreakers]]
+claim = "The founder can't state the basic numbers."
+from = ["know-your-numbers"]
+
+[[sources]]
+id = "bucknell-talk"
+title = "Entrepreneur and investor Kevin O'Leary shares how to succeed in business (Bucknell University, 2025 keynote and Q&A)"
+url = "https://www.bucknell.edu/news/entrepreneur-and-investor-kevin-oleary-shares-how-succeed-business"
+kind = "quoted-by-outlet"
+date = "2025-02"
+
+[[sources]]
+id = "cnbc-negotiating-2020"
+title = "Kevin O'Leary: How to make the best deals when negotiating (CNBC)"
+url = "https://www.cnbc.com/2020/10/29/kevin-oleary-how-to-make-the-best-deals-when-negotiating.html"
+kind = "quoted-by-outlet"
+date = "2020-10-29"
+
+[[sources]]
+id = "ibtimes-ring"
+title = "Kevin O'Leary says Ring founder rejecting his Shark Tank deal cost him $800 million (IBTimes UK)"
+url = "https://www.ibtimes.co.uk/kevin-oleary-ring-missed-opportunity-1804948"
+kind = "quoted-by-outlet"
+date = "unknown"
+
+[[sources]]
+id = "nbc-founder-cry"
+title = "Kevin O'Leary made a Shark Tank founder cry, then invested $100,000 (NBC Los Angeles)"
+url = "https://www.nbclosangeles.com/news/business/money-report/kevin-oleary-made-a-shark-tank-founder-cry-and-then-invested-100000-in-her-start-up/2799511/"
+kind = "quoted-by-outlet"
+date = "2021-12"

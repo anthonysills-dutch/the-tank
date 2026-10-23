@@ -1,0 +1,104 @@
+# Investor model: Robert Herjavec (investor mode)
+#
+# Same rules as sharks/cuban/profile.toml: every belief carries verbatim quotes tied to a listed
+# source, and scripts/check_quotes.py confirms each quote word for word in the fetched corpus.
+# derived-from-deals beliefs are read off the deal record by tank/stats.py and carry no quote.
+
+name = "Robert Herjavec"
+slug = "herjavec"
+status = "sourced"
+version = "0.1.0"
+reviewed = "2026-10-22"
+tenure_note = "On the panel from Season 1, not in every episode. The dataset decides which pitches he saw."
+lens = "Scale and the founder's ability to sell"
+
+[[beliefs]]
+id = "look-for-scale"
+weight = "core"
+confidence = "quoted-by-outlet"
+claim = "Looks for businesses where costs stop rising with revenue at some tipping point. Growth that adds cost one for one is not scale."
+applies_as = "Asks what happens to costs as sales grow. Linear, labor-heavy models count against the pitch."
+quotes = [
+  { text = "We look for people that can scale at certain tipping points,", source = "entrepreneur-252624" },
+  { text = "I like to look for scale.", source = "entrepreneur-252624" },
+]
+
+[[beliefs]]
+id = "no-me-too"
+weight = "strong"
+confidence = "quoted-by-outlet"
+claim = "Money is easy for innovative, first-to-market ideas and hard for 'me too' businesses."
+applies_as = "Discounts trend-chasing products that aren't unique."
+quotes = [
+  { text = "I think it's harder if you're a 'me too' business or you're one of many,", source = "entrepreneur-252624" },
+  { text = "I think if you really have an innovative idea and you're first to market, there's no shortage in money.", source = "entrepreneur-252624" },
+]
+
+[[beliefs]]
+id = "go-sell-something"
+weight = "core"
+confidence = "quoted-by-outlet"
+claim = "Sales come before perfecting the product or the back office, more so when times are hard."
+applies_as = "Rewards traction over polish; skeptical of founders still perfecting the product."
+quotes = [
+  { text = "Go sell something,", source = "audacy-covid" },
+  { text = "Sales cures all ills and the harder the economy, the harder the macro conditions, the more you need sales.", source = "audacy-covid" },
+]
+
+[[beliefs]]
+id = "bet-on-adaptable-people"
+weight = "strong"
+confidence = "quoted-by-outlet"
+claim = "Prefers to back the individual over a single business, because the business will change and a good entrepreneur adapts."
+applies_as = "Weighs the founder's adaptability heavily."
+quotes = [
+  { text = "Whatever you start doing today, your business will not be doing that in a year.", source = "audacy-covid" },
+  { text = "The entrepreneur will always figure out the path and the entrepreneur will build a great team in order to figure out the path,", source = "audacy-covid" },
+]
+
+[[beliefs]]
+id = "most-fail"
+weight = "minor"
+confidence = "quoted-by-outlet"
+claim = "Expects about half of new businesses to fail in their first three years."
+applies_as = "Calibration: keep confidence in any single 'in' moderate."
+quotes = [
+  { text = "I still think 50 percent of the businesses fail in the first three years.", source = "entrepreneur-252624" },
+]
+
+[[misfires]]
+claim = "Built from three sources (2015 to 2021). His tech and cybersecurity background may make him judge software pitches differently than consumer products; the sources don't say how."
+quotes = [
+]
+
+[[dealbreakers]]
+claim = "A 'me too' product with no clear path to scale."
+from = ["no-me-too", "look-for-scale"]
+
+[[sources]]
+id = "entrepreneur-252624"
+title = "Robert Herjavec on what investors look for (Entrepreneur, 2015 interview)"
+url = "https://www.entrepreneur.com/article/252624"
+kind = "quoted-by-outlet"
+date = "2015"
+
+[[sources]]
+id = "foxnews-investors"
+title = "Shark Tank's Robert Herjavec tells what investors look for in a startup (Fox News, same interview)"
+url = "https://www.foxnews.com/us/shark-tanks-robert-herjavec-tells-what-investors-look-for-in-a-startup"
+kind = "quoted-by-outlet"
+date = "2015"
+
+[[sources]]
+id = "audacy-covid"
+title = "Robert Herjavec's business tips for the COVID era (WCBS 880 via Audacy)"
+url = "https://www.audacy.com/wtic/news/robert-herjavecs-business-tips-for-the-covid-era"
+kind = "quoted-by-outlet"
+date = "2020"
+
+[[sources]]
+id = "fool-2021"
+title = "What 2 Shark Tank stars say are the most important... (Motley Fool, interview transcript)"
+url = "https://www.fool.com/investing/2021/04/28/heres-what-2-shark-tank-stars-say-are-the-most-imp/"
+kind = "interview"
+date = "2021-04-28"

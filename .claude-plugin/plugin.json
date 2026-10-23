@@ -1,0 +1,8 @@
+{
+  "name": "the-tank",
+  "version": "0.1.0",
+  "description": "Independent investor models built from each original Shark's public record. Each one picks your pitch apart separately, and every model is backtested against dumb baselines.",
+  "author": { "name": "Anthony Sills" },
+  "license": "MIT",
+  "keywords": ["pitch", "investors", "startup", "evaluation"]
+}

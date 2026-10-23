@@ -1,0 +1,26 @@
+{
+  "site-hero-or-zero": {
+    "url": "https://lorigreiner.com/lorigreinersheroorzero/",
+    "status": "thin",
+    "words": 286,
+    "fetched": "2026-10-22"
+  },
+  "foxbusiness-qvc": {
+    "url": "https://www.foxbusiness.com/features/how-do-you-get-on-qvc-some-tips-from-entrepreneur-and-shark-tank-investor-lori-greiner",
+    "status": "ok",
+    "words": 981,
+    "fetched": "2026-10-22"
+  },
+  "nbcnews-swim": {
+    "url": "https://www.nbcnews.com/news/amp/wbna46777153",
+    "status": "ok",
+    "words": 1012,
+    "fetched": "2026-10-22"
+  },
+  "entrepreneur-223154": {
+    "url": "https://www.entrepreneur.com/blog/223154",
+    "status": "ok",
+    "words": 987,
+    "fetched": "2026-10-22"
+  }
+}

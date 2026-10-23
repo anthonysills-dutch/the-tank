@@ -1,0 +1,34 @@
+{
+  "foxnews-investors": {
+    "url": "https://www.foxnews.com/us/shark-tanks-robert-herjavec-tells-what-investors-look-for-in-a-startup",
+    "status": "ok",
+    "words": 1164,
+    "fetched": "2026-10-22"
+  },
+  "entrepreneur-252624": {
+    "url": "https://www.entrepreneur.com/article/252624",
+    "status": "ok",
+    "words": 1136,
+    "fetched": "2026-10-22"
+  },
+  "fool-2021": {
+    "url": "https://www.fool.com/investing/2021/04/28/heres-what-2-shark-tank-stars-say-are-the-most-imp/",
+    "status": "ok",
+    "words": 1072,
+    "fetched": "2026-10-22"
+  },
+  "inc-hooking": {
+    "url": "https://www.inc.com/graham-winfrey/robert-herjavec-on-hooking-a-shark-investor.html",
+    "status": "fail: HTTP Error 403: Forbidden"
+  },
+  "inc-beyond-tank": {
+    "url": "https://www.inc.com/graham-winfrey/robert-herjavec-on-beyond-the-tank.html",
+    "status": "fail: HTTP Error 403: Forbidden"
+  },
+  "audacy-covid": {
+    "url": "https://www.audacy.com/wtic/news/robert-herjavecs-business-tips-for-the-covid-era",
+    "status": "ok",
+    "words": 1328,
+    "fetched": "2026-10-22"
+  }
+}
