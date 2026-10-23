@@ -8,14 +8,16 @@ Date: (YYYY-MM-DD)
 
 ## Summary
 
-| Shark model | Decision | Probability of an offer | Offer |
-|---|---|---|---|
-| Cuban | | | |
-| O'Leary | | | |
-| Corcoran | | | |
-| Greiner | | | |
-| Herjavec | | | |
-| John | | | |
+| Shark model | Decision | Probability of an offer | Usual offer rate | Signal | Offer |
+|---|---|---|---|---|---|
+| Cuban | | | | | |
+| O'Leary | | | | | |
+| Corcoran | | | | | |
+| Greiner | | | | | |
+| Herjavec | | | | | |
+| John | | | | | |
+
+Most pitches get OUT from most Sharks. Read the Signal column first. ABOVE means that this pitch is a stronger fit than usual for that Shark.
 
 ## Verdicts
 

@@ -41,11 +41,46 @@ MODEL_TAG = "claude-code"
 
 
 def job_dir(kind, shark=None):
-    return WORK / (f"backtest-{shark}" if kind == "backtest" else "probe")
+    return WORK / (f"{kind}-{shark}" if kind in ("backtest", "repeat") else "probe")
+
+
+def write_batches(d, instructions_text, items, batch_size):
+    """items: [(real_id, text)]. Writes instructions.md, batch-NN.md and key.json (item -> real_id) under d."""
+    if d.exists():
+        shutil.rmtree(d)
+    d.mkdir(parents=True)
+    (d / "instructions.md").write_text(instructions_text, encoding="utf-8")
+    key, n = {}, 0
+    for b, start in enumerate(range(0, len(items), batch_size), 1):
+        chunk = items[start:start + batch_size]
+        lines = [f"# Batch {b:02d}", "", f"Output file: {(d / f'out-{b:02d}.jsonl').as_posix()}", ""]
+        for i, (real_id, text) in enumerate(chunk, 1):
+            item = f"b{b:02d}-{i:02d}"
+            key[item] = real_id
+            lines += ["---", f"ITEM {item}", "", text, ""]
+        (d / f"batch-{b:02d}.md").write_text("\n".join(lines), encoding="utf-8")
+        n = b
+    (d / "key.json").write_text(json.dumps(key, indent=2), encoding="utf-8")
+    print(f"{len(items)} items in {n} batches under {d.relative_to(ROOT).as_posix()}")
+    print("Spawn one subagent per batch (see .claude/skills/tank-eval/SKILL.md), then run collect.")
+
+
+def read_answers(d):
+    answers, bad = {}, []
+    for out in sorted(d.glob("out-*.jsonl")):
+        for n, line in enumerate(out.read_text(encoding="utf-8").splitlines(), 1):
+            if not line.strip():
+                continue
+            try:
+                row = json.loads(line)
+                answers[row["item"]] = row["answer"]
+            except (json.JSONDecodeError, KeyError, TypeError):
+                bad.append(f"{out.name}:{n}")
+    return answers, bad
 
 
 def instructions(kind, system, schema):
-    task = ("judge each pitch as the investor described below" if kind == "backtest"
+    task = ("judge each pitch as the investor described below" if kind in ("backtest", "repeat")
             else "say whether you recognize each anonymized pitch")
     return "\n".join([
         f"# Task: {task}",
@@ -73,7 +108,8 @@ def instructions(kind, system, schema):
 def prepare(args):
     records = load_jsonl(args.data)
     test_on = parse_seasons(args.test_on)
-    if args.kind == "backtest":
+    rng = random.Random(5)
+    if args.kind in ("backtest", "repeat"):
         system, jobs = build(records, args.shark, args.test_seasons, test_on)
         items = [(r["pitch_id"], user) for r, user in jobs]
         schema = VERDICT_SCHEMA
@@ -82,26 +118,58 @@ def prepare(args):
         system, schema = PROBE_SYSTEM, PROBE_SCHEMA
         items = [(r["pitch_id"], "## The pitch\n" + card_text(r["card"])) for r in records if r["pitch_id"] in ids]
 
-    rng = random.Random(5)
-    rng.shuffle(items)  # so batch order says nothing about season or episode
     d = job_dir(args.kind, args.shark)
-    if d.exists():
-        shutil.rmtree(d)
-    d.mkdir(parents=True)
-    (d / "instructions.md").write_text(instructions(args.kind, system, schema), encoding="utf-8")
-    key, batches = {}, []
-    for b, start in enumerate(range(0, len(items), args.batch_size), 1):
-        chunk = items[start:start + args.batch_size]
+    if args.kind == "repeat":
+        # Consistency: judge the same pitches twice. Copy 1 and copy 2 go in separate batches, each in
+        # its own shuffled order, so the two judgments of one pitch never share a batch or a subagent.
+        picked = rng.sample(items, min(args.n, len(items)))
+        first, second = [(f"{pid}#1", t) for pid, t in picked], [(f"{pid}#2", t) for pid, t in picked]
+        rng.shuffle(first)
+        rng.shuffle(second)
+        write_batches(d, instructions(args.kind, system, schema), first, args.batch_size)
+        _append_batches(d, second, args.batch_size, len(list(d.glob("batch-*.md"))))
+        return
+    rng.shuffle(items)  # so batch order says nothing about season or episode
+    write_batches(d, instructions(args.kind, system, schema), items, args.batch_size)
+
+
+def _append_batches(d, items, batch_size, offset):
+    key = json.loads((d / "key.json").read_text(encoding="utf-8"))
+    for b, start in enumerate(range(0, len(items), batch_size), offset + 1):
+        chunk = items[start:start + batch_size]
         lines = [f"# Batch {b:02d}", "", f"Output file: {(d / f'out-{b:02d}.jsonl').as_posix()}", ""]
-        for i, (pitch_id, text) in enumerate(chunk, 1):
+        for i, (real_id, text) in enumerate(chunk, 1):
             item = f"b{b:02d}-{i:02d}"
-            key[item] = pitch_id
-            lines += [f"---", f"ITEM {item}", "", text, ""]
+            key[item] = real_id
+            lines += ["---", f"ITEM {item}", "", text, ""]
         (d / f"batch-{b:02d}.md").write_text("\n".join(lines), encoding="utf-8")
-        batches.append(b)
     (d / "key.json").write_text(json.dumps(key, indent=2), encoding="utf-8")
-    print(f"{len(items)} items in {len(batches)} batches under {d.relative_to(ROOT).as_posix()}")
-    print("Spawn one subagent per batch (see .claude/skills/tank-eval/SKILL.md), then run collect.")
+    print(f"{len(key)} items in {len(list(d.glob('batch-*.md')))} batches under {d.relative_to(ROOT).as_posix()}")
+
+
+def name_leaked(record):
+    """True when the company name (or a distinctive 5+ letter part of it) is still in the card text."""
+    from tank.data import _name_tokens, fix_text
+    from tank.quotes import norm
+    text = norm(fix_text(record["card"]["description"]))
+    name = fix_text(record["secret"]["name"])
+    joined = norm(name).replace(" ", "").replace("'", "")
+    if len(joined) >= 5 and joined in text.replace(" ", ""):
+        return True
+    # Near-misses: "SiliDogs" in the dataset vs "SiliDog" in the text.
+    import difflib
+    words = text.split()
+    for n in (1, 2, 3):
+        for i in range(len(words) - n + 1):
+            cand = "".join(words[i:i + n]).replace("'", "")
+            if len(joined) >= 5 and difflib.SequenceMatcher(None, joined, cand).ratio() >= 0.88:
+                return True
+    return any(len(t) >= 5 and f" {norm(t)} " in f" {text} " for t in _name_tokens(name)
+               if norm(t) not in COMMON)
+
+
+COMMON = {"brand", "company", "products", "kitchen", "design", "water", "health", "smart", "pets", "baby",
+          "clean", "beauty", "fresh", "foods", "light", "sleep", "fitness", "coffee"}
 
 
 def _valid_verdict(a):
@@ -115,26 +183,21 @@ def _valid_verdict(a):
 def collect(args):
     d = job_dir(args.kind, args.shark)
     key = json.loads((d / "key.json").read_text(encoding="utf-8"))
-    answers, bad = {}, []
-    for out in sorted(d.glob("out-*.jsonl")):
-        for n, line in enumerate(out.read_text(encoding="utf-8").splitlines(), 1):
-            if not line.strip():
-                continue
-            try:
-                row = json.loads(line)
-                answers[row["item"]] = row["answer"]
-            except (json.JSONDecodeError, KeyError, TypeError):
-                bad.append(f"{out.name}:{n}")
+    answers, bad = read_answers(d)
     missing = [i for i in key if i not in answers]
 
     RESULTS.mkdir(parents=True, exist_ok=True)
     records = {r["pitch_id"]: r for r in load_jsonl(args.data)}
-    if args.kind == "backtest":
-        path = RESULTS / f"llm_{args.shark}_{MODEL_TAG}.jsonl"
+    if args.kind in ("backtest", "repeat"):
+        name = "llm" if args.kind == "backtest" else "repeat"
+        path = RESULTS / f"{name}_{args.shark}_{MODEL_TAG}.jsonl"
         with open(path, "w", encoding="utf-8") as fh:
-            for item, pitch_id in key.items():
+            for item, real_id in key.items():
                 a = answers.get(item)
+                pitch_id, _, run = real_id.partition("#")
                 row = {"pitch_id": pitch_id, "shark": args.shark, "model": MODEL_TAG}
+                if run:
+                    row["run"] = int(run)
                 if a is not None and _valid_verdict(a):
                     row.update(verdict=a, error=None)
                 else:
@@ -149,6 +212,13 @@ def collect(args):
                 if a:
                     row.update(a)
                     row["match"] = bool(a.get("recognized") and name_match(a.get("company_name"), records[pitch_id]["secret"]["name"]))
+                # A name that survived anonymization counts as recognized even if the evaluator says it doesn't
+                # remember the pitch: the backtest model sees the same text and could still recall the outcome.
+                # Strict: any claimed recognition counts, even with a wrong name, since partial recall
+                # of the pitch can still carry the outcome.
+                row["name_leak"] = name_leaked(records[pitch_id])
+                row["named_correctly"] = bool(row.get("match"))
+                row["match"] = bool(row.get("recognized")) or row["name_leak"]
                 fh.write(json.dumps(row) + "\n")
     print(f"{len(key) - len(missing)}/{len(key)} answered; {len(bad)} unparseable lines {bad[:5]}; "
           f"missing batches: {sorted({i[:3] for i in missing})}")
@@ -165,15 +235,16 @@ def status(args):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("action", choices=["prepare", "collect", "status"])
-    ap.add_argument("kind", choices=["backtest", "probe"])
+    ap.add_argument("kind", choices=["backtest", "probe", "repeat"])
     ap.add_argument("--shark")
+    ap.add_argument("--n", type=int, default=45, help="repeat only: how many test pitches to judge twice")
     ap.add_argument("--test-seasons", type=int, default=3)
     ap.add_argument("--test-on")
     ap.add_argument("--batch-size", type=int, default=15)
     ap.add_argument("--data", default=str(PROCESSED))
     args = ap.parse_args()
-    if args.kind == "backtest" and not args.shark:
-        ap.error("backtest needs --shark")
+    if args.kind in ("backtest", "repeat") and not args.shark:
+        ap.error(f"{args.kind} needs --shark")
     {"prepare": prepare, "collect": collect, "status": status}[args.action](args)
 
 

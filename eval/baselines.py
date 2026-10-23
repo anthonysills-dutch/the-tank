@@ -101,7 +101,7 @@ def run(records, slug, test_seasons, test_on=None):
         "test_n": len(test),
         "train_invest_rate": rate,
         "metrics": {
-            name: summarize(y_test, [preds[r["pitch_id"]][name] for r in test])
+            name: summarize(y_test, [preds[r["pitch_id"]][name] for r in test], threshold=rate)
             for name in ("always_out", "base_rate", "logistic")
         } if test else {},
         "predictions": preds,

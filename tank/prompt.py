@@ -57,11 +57,58 @@ VERDICT_SCHEMA = {
 }
 
 
+MOVE_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "move": {"type": "string", "enum": ["HOLD", "IMPROVE", "PARTNER", "DROP", "ENTER", "ACCEPT", "REJECT", "FINAL"]},
+        "terms": {
+            "type": "object",
+            "description": "Your offer after this move. All null after DROP or REJECT.",
+            "properties": {
+                "amount_usd": {"type": ["number", "null"]},
+                "equity_pct": {"type": ["number", "null"]},
+                "royalty": {"type": ["string", "null"]},
+                "loan_usd": {"type": ["number", "null"]},
+                "conditions": {"type": "array", "items": {"type": "string"}},
+                "partner": {"type": ["string", "null"], "description": "Slug of the partner on a PARTNER move."},
+            },
+            "required": ["amount_usd", "equity_pct", "royalty", "loan_usd", "conditions", "partner"],
+            "additionalProperties": False,
+        },
+        "reason": {"type": "string", "description": "One sentence, in this investor's lens."},
+    },
+    "required": ["move", "terms", "reason"],
+    "additionalProperties": False,
+}
+
+
+def negotiation_block(stats):
+    """Tank mode instructions for the shipped agents. Not used by the backtest."""
+    lines = [
+        "",
+        "## Tank mode (only when the message starts with TANK MODE)",
+        "- Reply with JSON matching the move schema, not the verdict schema.",
+        "- You see the offer board (terms only) and your own earlier verdict. You never see another investor's reasoning.",
+        "- Shark rounds: HOLD, IMPROVE (better for the founder), PARTNER (joint offer), or DROP.",
+        "- ENTER: only in round 1, only if your verdict was 'out' and your p_invest was at least 1.5 times your offer rate.",
+        "- Founder counters: ACCEPT, REJECT, or FINAL (your last terms).",
+        "- Never accept a counter at a higher valuation than the founder asked for at the start.",
+        "- Do not enter or stay in a deal that your dealbreakers rule out.",
+    ]
+    if stats.get("median_valuation_vs_ask") is not None:
+        lines.append(f"- Your record: deals closed at a median {stats['median_valuation_vs_ask']:g} times the asked valuation; "
+                     f"{stats['paid_full_ask_share']:.0%} at the full ask. Anchor your terms on that.")
+    if stats.get("partners"):
+        names = ", ".join(f"{p['shark']} ({p['deals_together']})" for p in stats["partners"])
+        lines.append(f"- PARTNER only with investors you have shared deals with: {names}.")
+    return lines
+
+
 def _money(v):
     return f"${v:,.0f}" if isinstance(v, (int, float)) else "unknown"
 
 
-def system_prompt(profile, stats):
+def system_prompt(profile, stats, negotiation=False):
     name = profile["name"]
     lines = [
         f"You are an investor model built from {name}'s public record: interviews, writing, and on-air deal history.",
@@ -115,6 +162,8 @@ def system_prompt(profile, stats):
         "- If 'out', set every offer field to null and conditions to [].",
         "- Reply with JSON matching the verdict schema and nothing else.",
     ]
+    if negotiation:
+        lines += negotiation_block(stats)
     return "\n".join(lines)
 
 

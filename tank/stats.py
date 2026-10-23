@@ -32,7 +32,23 @@ def shark_stats(records, slug):
     solo = [r for r in deals if r["outcome"]["per_shark"] and sum(
         1 for s in r["outcome"]["per_shark"].values() if s["invested"]) == 1]
 
+    # Negotiation behavior, for Tank mode. Deal valuation / the founder's asked valuation: below 1 means the
+    # Shark took more equity for the money than the founder offered.
+    ratios = []
+    for r in deals:
+        s, ask_v = r["outcome"]["per_shark"][slug], r["card"].get("implied_valuation")
+        if s["amount"] and s["equity_pct"] and ask_v:
+            ratios.append((s["amount"] / (s["equity_pct"] / 100)) / ask_v)
+    partners = Counter(other for r in deals for other, s in r["outcome"]["per_shark"].items()
+                       if other != slug and s["invested"])
+    shared = len(deals) - len(solo)
+
     return {
+        "median_valuation_vs_ask": round(median(ratios), 2) if ratios else None,
+        "valuation_ratio_n": len(ratios),
+        "paid_full_ask_share": round(sum(1 for x in ratios if x >= 0.95) / len(ratios), 3) if ratios else None,
+        "partners": [{"shark": k, "deals_together": v, "share_of_shared_deals": round(v / shared, 3)}
+                     for k, v in partners.most_common()] if shared else [],
         "pitches_seen": len(seen),
         "deals": len(deals),
         "invest_rate": round(overall, 3),

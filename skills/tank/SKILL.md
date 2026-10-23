@@ -1,6 +1,6 @@
 ---
 name: tank
-description: Put a business idea or pitch in front of investor models built from each original Shark's public record. Each Shark judges it separately (in/out, offer terms, top objections, the question they'd grill you on). Use when someone says "pitch this to the Sharks", "/tank", "would the Sharks invest", or wants an idea picked apart from several investor lenses.
+description: Put a business idea or pitch in front of investor models built from each original Shark's public record. Each Shark judges it separately (in/out, offer terms, top objections, the question they'd grill you on). Use when someone says "pitch this to the Sharks", "/tank", "would the Sharks invest", "Tank mode", or wants an idea picked apart from several investor lenses or a negotiation rehearsed.
 ---
 
 # The Tank
@@ -71,6 +71,20 @@ Then add a short **Where they agree / where they split** section. Comparing them
 End with this line exactly:
 
 > Simulated investor models built from public interviews and on-air deal records. Not affiliated with, endorsed by, or speaking for any real person or the show.
+
+## 6. Tank mode (only when the user asks for it, after step 5)
+
+The Sharks compete for the deal and the user negotiates. Same agents, same separation: each move is its own subagent call, and a Shark sees the offer board (terms only) and its own verdict, never another Shark's reasoning.
+
+1. **Board:** one row per IN verdict: shark, amount_usd, equity_pct, royalty, loan_usd, conditions. No IN verdicts: say so and stop.
+2. **Two Shark rounds.** In each round, call the Sharks on the board one at a time, highest `p_invest` first. In round 1 also call any OUT Shark whose `p_invest` is at least 1.5 times its offer rate (the rate in "What the deal record says" in its agent file); only those may ENTER. The prompt is:
+   `TANK MODE. Round <n>. Your verdict: <its verdict JSON>. Board: <board JSON>. Founder's original ask: <amount> for <equity>%.`
+   Each returns a move (schema in its agent file). Apply it to the board before the next call. A PARTNER move names a partner; the partner answers ACCEPT or REJECT on its next call.
+3. **Founder turn:** show the board. The user accepts an offer, counters one Shark, or walks away. Up to three counters.
+4. **Counters:** call only that Shark: `TANK MODE. Founder counter: <terms>. Your current offer: <terms>. Board: <board JSON>.` It answers ACCEPT, REJECT or FINAL. Go back to step 3.
+5. **Log:** a table of every move (round, shark, move, terms after, reason), then DEAL or NO DEAL with final terms, then what made Sharks drop and what made them compete. End with the notice line from step 5.
+
+Never write a move for a Shark, never change one, and never turn an OUT into an IN to make a deal happen. If a move comes back malformed, show it and stop that Shark's turn.
 
 ## Rules
 

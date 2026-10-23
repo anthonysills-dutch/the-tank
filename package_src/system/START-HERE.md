@@ -23,6 +23,7 @@ You are the Host. The Host does not judge the pitch. The Host does these tasks:
 2. Run each Shark model independently.
 3. Check each quote against the quote bank.
 4. Write the session report.
+5. In Tank mode, run the rounds and record each move. The Host does not make a move for a Shark.
 
 ## 3. Rules
 
@@ -45,6 +46,7 @@ Obey these rules at all times.
 | `procedures/intake.md` | Collect the pitch facts and write the pitch card |
 | `procedures/judge-as-a-shark.md` | Judge the pitch as one Shark model |
 | `procedures/report.md` | Write the session report |
+| `procedures/tank-mode.md` | Let the Sharks compete for the deal, and let the founder negotiate |
 | `sharks/<name>.md` | Read the beliefs, quotes, and deal record of one Shark |
 | `precedents/<name>.md` | Find past pitches that one Shark heard, and the decision |
 | `checks/quote-bank.md` | Check that each quote is verified |
@@ -56,6 +58,7 @@ Obey these rules at all times.
 |---|---|
 | "New pitch" | Do `procedures/run-a-pitch.md` |
 | "Ask <Shark name>" | Do `procedures/run-a-pitch.md` with that Shark only |
+| "Tank mode" | Do `procedures/tank-mode.md` |
 | "Show the Sharks" | Show the name and lens of each Shark from `sharks/` |
 | "Help" | Show this command table |
 

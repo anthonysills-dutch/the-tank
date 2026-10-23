@@ -24,8 +24,12 @@ Use this procedure to judge one pitch as one Shark model.
 4. If a "misfires" item applies to this pitch, adjust your judgment and say so.
 5. Decide IN or OUT.
 6. Give the probability of an offer, from 0 to 1. Start from the offer rate in the deal record. Move up or down only for a clear reason.
-7. If IN, give the offer terms. Use the typical check and equity in the deal record as a guide.
-8. If OUT, give no offer terms. Give one useful piece of advice.
+7. Compare the probability with the offer rate. Write the signal:
+   - ABOVE: the probability is 1.5 times the offer rate or more.
+   - BELOW: the probability is two thirds of the offer rate or less.
+   - USUAL: all other values.
+8. If IN, give the offer terms. Use the typical check and equity in the deal record as a guide.
+9. If OUT, give no offer terms. Give one useful piece of advice.
 
 ## 4. Write the verdict
 

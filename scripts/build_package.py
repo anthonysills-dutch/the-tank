@@ -92,6 +92,16 @@ def shark_md(p, stats):
         if stats.get(key):
             lines.append(f"- {label} by industry: " + "; ".join(
                 f"{d['industry']} {d['invest_rate']:.0%} of {d['seen']}" for d in stats[key]) + ".")
+    lines += ["", "## Negotiation record", "",
+              "Tank mode uses this section. It shows how this investor negotiated on air.", ""]
+    if stats.get("median_valuation_vs_ask") is not None:
+        lines.append(f"- Deal valuation compared with the founder's asked valuation: {stats['median_valuation_vs_ask']:g} times "
+                     f"(median of {stats['valuation_ratio_n']} deals). Below 1 means more equity for the same money.")
+    if stats.get("paid_full_ask_share") is not None:
+        lines.append(f"- Deals at the full asked valuation or higher: {stats['paid_full_ask_share']:.0%}.")
+    if stats.get("partners"):
+        lines.append("- Partners in shared deals: " + "; ".join(
+            f"{SHORT[x['shark']]} {x['deals_together']}" for x in stats["partners"]) + ".")
     lines += ["", "## Sources", "", "| ID | Source | Type | Date |", "|---|---|---|---|"]
     lines += [f"| {x['id']} | [{x['title']}]({x['url']}) | {x['kind']} | {x.get('date', '')} |" for x in p["sources"]]
     return "\n".join(lines) + "\n"
@@ -203,7 +213,8 @@ def build():
     pack = OUT / "upload-pack"
     pack.mkdir()
     order = ["procedures/run-a-pitch.md", "procedures/intake.md", "procedures/judge-as-a-shark.md", "procedures/report.md",
-             "templates/pitch-card.md", "templates/verdict.md", "templates/session-report.md",
+             "procedures/tank-mode.md", "templates/pitch-card.md", "templates/verdict.md", "templates/session-report.md",
+             "templates/tank-log.md",
              "tests/sample-pitch.md", "tests/self-test-checks.md", "precedents/INDUSTRIES.md", "checks/quote-bank.md"]
     order += [f"sharks/{s}.md" for s in ORDER]
     for rel in order:

@@ -25,7 +25,17 @@ Default window: `--test-on 7-8`. Those are the seasons with full product descrip
 5. **Collect:**
    - `python eval/claude_code.py collect probe`
    - `python eval/claude_code.py collect backtest --shark <slug>`
-6. **Score:** `python eval/score.py --shark <slug> --model claude-code`. Report the verdict line, the table for "not recognized by the model", and the offer-terms line. Say plainly if it FAILED.
+6. **Score:** `python eval/score.py --shark <slug> --model claude-code`. Report the verdict line, the table for "not recognized by the model", the calibration table, and the offer-terms line. Say plainly if it FAILED.
+7. **Critique checks (free, local):** `python eval/critique_checks.py --shark <slug>`. Report the pass rate of each check.
+
+## Other jobs (same batch method as step 3)
+
+- **Consistency** (about 6 subagents per Shark):
+  `python eval/claude_code.py prepare repeat --shark <slug> --test-on 7-8 --n 45`, run the batches in `eval/work/repeat-<slug>/`,
+  `python eval/claude_code.py collect repeat --shark <slug>`, then `python eval/consistency.py --shark <slug>`.
+- **Critique rubric** (about 3 subagents per Shark; needs a finished backtest):
+  `python eval/rubric.py prepare --shark <slug> --n 30`, run the batches in `eval/work/grade-<slug>/`,
+  `python eval/rubric.py collect --shark <slug>`. Read the "worst flaws" lines; do not report only the means.
 
 ## Rules
 

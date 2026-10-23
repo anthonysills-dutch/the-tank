@@ -32,10 +32,37 @@ def f1_in(y, yhat):
     return 2 * tp / (2 * tp + fp + fn) if tp else 0.0
 
 
+def auc(y, p):
+    """Probability that a random real offer ranks above a random pass. 0.5 is a coin flip. None if a class is empty."""
+    pos = [pi for yi, pi in zip(y, p) if yi]
+    neg = [pi for yi, pi in zip(y, p) if not yi]
+    if not pos or not neg:
+        return None
+    wins = sum((a > b) + 0.5 * (a == b) for a in pos for b in neg)
+    return wins / (len(pos) * len(neg))
+
+
+def calibration_bins(y, p, bins=3):
+    """Sort by p, cut into equal-size bins, and compare the mean prediction with the real offer rate in each."""
+    order = sorted(range(len(y)), key=lambda i: p[i])
+    size = max(1, len(order) // bins)
+    out = []
+    for b in range(bins):
+        idx = order[b * size:] if b == bins - 1 else order[b * size:(b + 1) * size]
+        if idx:
+            out.append({"n": len(idx), "mean_p": sum(p[i] for i in idx) / len(idx),
+                        "offer_rate": sum(y[i] for i in idx) / len(idx)})
+    return out
+
+
 def summarize(y, p, threshold=0.5):
+    """p at or above threshold counts as 'in'. Pass the Shark's training offer rate, not 0.5:
+    calibrated probabilities for a Shark who invests in 15% of pitches rarely reach 0.5."""
     yhat = [pi >= threshold for pi in p]
     return {
         "n": len(y),
+        "threshold": threshold,
+        "auc": auc(y, p),
         "positives": sum(y),
         "accuracy": sum(1 for a, b in zip(y, yhat) if a == b) / len(y),
         "balanced_accuracy": balanced_accuracy(y, yhat),

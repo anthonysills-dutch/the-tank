@@ -4,6 +4,8 @@
 |---|---|
 | Decision | IN / OUT |
 | Probability of an offer | 0.00 to 1.00 |
+| Usual offer rate of this Shark | (from the deal record) |
+| Signal | ABOVE / USUAL / BELOW |
 | Offer: amount ($) | (IN only) |
 | Offer: equity (%) | (IN only) |
 | Offer: royalty | (IN only, or "none") |

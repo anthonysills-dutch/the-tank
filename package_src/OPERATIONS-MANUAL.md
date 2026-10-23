@@ -60,7 +60,19 @@ NOTE: Give real numbers. If you do not give a number, the models treat it as "No
 4. Read "Where they split". These points depend on the lens of the investor.
 5. Do the actions in "Next steps".
 
-The probability of an offer starts from the real offer rate of that investor. Most pitches get OUT. A probability of 0.35 is a strong result for most Shark models.
+The probability of an offer starts from the real offer rate of that investor. Most pitches get OUT. Read the Signal column. ABOVE means that the pitch is a stronger fit than usual for that investor.
+
+## 5a. Tank mode
+
+Tank mode shows how a negotiation can go. Use it after a full session.
+
+1. Say "Tank mode".
+2. The AI makes a board of the offers from the IN verdicts.
+3. The Shark models move in two rounds. Each one holds, improves, partners, or drops its offer.
+4. You accept an offer, counter one offer, or walk away. You can make three counters.
+5. The AI writes the log: each move, the result, and the lessons.
+
+The terms come from the negotiation record of each investor. For example, most investors took more equity than the founder offered. Use the log to prepare your numbers. It does not predict a real negotiation.
 
 ## 6. Commands
 
@@ -68,6 +80,7 @@ The probability of an offer starts from the real offer rate of that investor. Mo
 |---|---|
 | "New pitch" | A full session with all six Shark models |
 | "Ask Cuban" (or another name) | A session with one Shark model |
+| "Tank mode" | After a full session: the Shark models compete for the deal, and you negotiate |
 | "Show the Sharks" | The name and lens of each Shark model |
 | "Help" | The list of commands |
 
