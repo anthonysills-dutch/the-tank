@@ -1,0 +1,34 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      # Standard library only (see README Section 2). No requirements file, so no pip cache.
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # Structure, source links, and quote length of each profile (tank/profiles.py).
+      - name: Validate the Shark profiles
+        run: python -c "from tank.profiles import sourced_slugs; print('valid profiles:', ', '.join(sourced_slugs()))"
+
+      - name: Check the STE rules
+        run: python scripts/ste_check.py
+
+      - name: Run the tests (synthetic data, no network, no API key)
+        run: python -m unittest discover tests
+
+      # The word-for-word quote check (scripts/check_quotes.py --all) needs the fetched corpus.
+      # Git ignores the corpus, so this check runs locally before each build (README Section 2, step 3).
+      # scripts/build_package.py also stops if a quote fails.

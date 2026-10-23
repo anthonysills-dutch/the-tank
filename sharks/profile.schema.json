@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/anthonysills-dutch/the-tank/sharks/profile.schema.json",
+  "title": "Shark profile",
+  "description": "The structure of sharks/<slug>/profile.toml after TOML parsing. tank/profiles.py is the enforcing validator. tests/test_schema.py keeps this file in step with it. Rules that JSON Schema cannot express: each quote.source must match a sources[].id, and each quote must be word for word in its fetched source (scripts/check_quotes.py).",
+  "type": "object",
+  "required": ["name", "slug", "status", "version", "lens"],
+  "properties": {
+    "name": { "type": "string", "description": "The real name of the investor that the model is built from." },
+    "slug": { "type": "string", "enum": ["cuban", "oleary", "corcoran", "greiner", "herjavec", "john"] },
+    "status": {
+      "type": "string",
+      "enum": ["sourced", "stub"],
+      "description": "sourced: usable, every belief is quoted. stub: lens only, never rendered into an agent or a backtest."
+    },
+    "version": { "type": "string" },
+    "reviewed": { "type": "string", "description": "Date of the last human review (YYYY-MM-DD)." },
+    "tenure_note": { "type": "string" },
+    "lens": { "type": "string", "description": "The one investment lens that the public record supports." },
+    "beliefs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "weight", "confidence", "claim"],
+        "properties": {
+          "id": { "type": "string" },
+          "weight": { "type": "string", "enum": ["core", "strong", "minor"] },
+          "confidence": {
+            "type": "string",
+            "enum": ["own-writing", "interview", "quoted-by-outlet", "derived-from-deals"],
+            "description": "derived-from-deals beliefs come from the deal record (tank/stats.py) and carry no quote."
+          },
+          "claim": { "type": "string" },
+          "applies_as": { "type": "string" },
+          "quotes": { "type": "array", "items": { "$ref": "#/$defs/quote" } }
+        }
+      }
+    },
+    "misfires": {
+      "type": "array",
+      "description": "Where this lens misfires. A sourced profile needs at least one.",
+      "items": {
+        "type": "object",
+        "required": ["claim"],
+        "properties": {
+          "claim": { "type": "string" },
+          "quotes": { "type": "array", "items": { "$ref": "#/$defs/quote" } }
+        }
+      }
+    },
+    "dealbreakers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["claim", "from"],
+        "properties": {
+          "claim": { "type": "string" },
+          "from": { "type": "array", "items": { "type": "string" }, "description": "The belief ids that this dealbreaker comes from." }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "url", "kind"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "url": { "type": "string", "pattern": "^http" },
+          "kind": { "type": "string", "enum": ["own-writing", "interview", "quoted-by-outlet"] },
+          "date": { "type": "string", "description": "YYYY-MM-DD, or \"unknown\"." }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "const": "sourced" } } },
+      "then": {
+        "required": ["beliefs", "misfires", "sources"],
+        "properties": { "beliefs": { "minItems": 1 }, "misfires": { "minItems": 1 } }
+      }
+    }
+  ],
+  "$defs": {
+    "quote": {
+      "type": "object",
+      "required": ["text", "source"],
+      "properties": {
+        "text": { "type": "string", "description": "Word for word from the source. 45 words or fewer." },
+        "source": { "type": "string", "description": "A sources[].id in the same profile." }
+      }
+    }
+  }
+}
